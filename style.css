@@ -139,6 +139,9 @@ input:focus-visible, button:focus-visible, summary:focus-visible, a:focus-visibl
 .chk::after { content: ""; width: 11px; height: 6px; border: solid var(--accent-ink); border-width: 0 0 2.5px 2.5px; transform: rotate(-45deg) scale(0) translate(1px, -1px); transition: transform .12s; }
 .chk:checked { background: var(--accent); border-color: var(--accent); }
 .chk:checked::after { transform: rotate(-45deg) scale(1) translate(1px, -1px); }
+.namebox { flex: 1; min-width: 130px; display: flex; flex-direction: column; gap: 1px; }
+.namebox .name { flex: none; min-width: 0; }
+.eq { font-size: .78rem; color: var(--muted); font-variant-numeric: tabular-nums; }
 .name { font-weight: 650; flex: 1; min-width: 130px; letter-spacing: -.005em; }
 .need { color: var(--muted); font-variant-numeric: tabular-nums; font-size: .85rem; }
 .counter { display: inline-flex; align-items: center; gap: 4px; }

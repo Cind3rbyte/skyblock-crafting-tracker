@@ -159,9 +159,25 @@ function usedBy(tree, rawId) {
   return out;
 }
 
-function howBlock(item, id) {
+// Erste Enchanted-Stufe direkt über den Rohstoffen: das sammelt man im Inventar, darunter steht der Rohstoff.
+function isStop(n) {
+  return !!n.children && n.id.startsWith("ENCHANTED_") && n.children.every((c) => !c.id.startsWith("ENCHANTED_"));
+}
+
+function matList(item) {
+  const sums = new Map(), nodes = new Map();
+  (function walk(n) {
+    if (!n.children || isStop(n)) {
+      sums.set(n.id, (sums.get(n.id) || 0) + n.need);
+      if (!nodes.has(n.id)) nodes.set(n.id, n);
+    } else n.children.forEach(walk);
+  })(item.tree);
+  return [...sums].map(([id, need]) => ({ id, need, node: nodes.get(id) }));
+}
+
+function howBlock(item, id, node) {
   const m = item.meta[id];
-  const hint = hints[id];
+  const hint = hints[id] || (node && isStop(node) ? hints[node.children[0].id] : null);
   const uses = usedBy(item.tree, id);
   const useText = uses.length
     ? "Wird gebraucht für: " + uses.map(({ p, c }) => `${fmt(p.need)}× ${nameOf(item, p.id)} (je ${fmt(c.need / p.need)})`).join(", ") + "."
@@ -192,20 +208,29 @@ function materialRow(item, mat) {
         class: "chk", type: "checkbox", checked: done, "aria-label": `${nameOf(item, mat.id)} abgehakt`,
         onchange: (ev) => setEntry(item.id, mat.id, ev.target.checked ? { c: true, h: mat.need } : { c: false, h: 0 }),
       }),
-      nameEl(item, mat.id),
+      h("span", { class: "namebox" }, nameEl(item, mat.id), eqLine(item, mat.node)),
       h("span", { class: "need" }, `${fmt(Math.min(e.c ? mat.need : e.h, mat.need))} / ${fmt(mat.need)}`),
       h("span", { class: "counter" },
         h("button", { type: "button", "aria-label": "Weniger", onclick: () => setEntry(item.id, mat.id, { h: Math.max(0, e.h - step), c: false }) }, "−"),
         input,
         h("button", { type: "button", "aria-label": "Mehr", onclick: () => { const v = e.h + step; setEntry(item.id, mat.id, { h: v, c: v >= mat.need }); } }, "+"))),
     h("div", { class: "mbar" }, h("i", { style: `width:${Math.round(frac * 100)}%` })),
-    howBlock(item, mat.id));
+    howBlock(item, mat.id, mat.node));
+}
+
+// "= 51.200 Diamond" unter dem Enchanted-Item
+function eqLine(item, node) {
+  if (!node || !isStop(node)) return null;
+  const parts = node.children.map((c) => `${fmt(c.need)}× ${nameOf(item, c.id)}`).join(" + ");
+  return h("span", { class: "eq" }, `= ${parts}`);
 }
 
 function treeNode(item, n) {
-  const key = n.children ? "step:" + n.id : n.id;
+  const stop = isStop(n);
+  const hasKids = !!n.children && !stop;
+  const key = hasKids ? "step:" + n.id : n.id;
   const e = entry(item.id, key);
-  const done = n.children ? e.c : e.c || e.h >= n.need;
+  const done = hasKids ? e.c : e.c || e.h >= n.need;
   const badges = [];
   if (n.recipe) {
     const dur = fmtDuration(n.recipe.duration);
@@ -217,23 +242,24 @@ function treeNode(item, n) {
       h("input", {
         class: "chk", type: "checkbox", checked: done, "aria-label": `${nameOf(item, n.id)} abgehakt`,
         onchange: (ev) => {
-          if (n.children) setEntry(item.id, key, { c: ev.target.checked });
+          if (hasKids) setEntry(item.id, key, { c: ev.target.checked });
           else setEntry(item.id, key, ev.target.checked ? { c: true, h: n.need } : { c: false, h: 0 });
         },
       }),
-      nameEl(item, n.id),
+      h("span", { class: "namebox" }, nameEl(item, n.id), eqLine(item, n)),
       h("span", { class: "need" }, `×${fmt(n.need)}`),
       badges),
-    n.children ? h("ul", {}, n.children.map((c) => treeNode(item, c))) : null);
+    hasKids ? h("ul", {}, n.children.map((c) => treeNode(item, c))) : null);
 }
 
 function progress(item) {
+  const mats = matList(item);
   let sum = 0;
-  for (const m of item.raw) {
+  for (const m of mats) {
     const e = entry(item.id, m.id);
     sum += e.c ? 1 : Math.min(e.h / m.need, 1);
   }
-  return item.raw.length ? sum / item.raw.length : 0;
+  return mats.length ? sum / mats.length : 0;
 }
 
 function tabName(id) { return indexMap.get(id)?.n || built.get(id)?.meta?.[id]?.name || id; }
@@ -272,7 +298,8 @@ function render() {
   const m = item.meta[item.id];
   const root = item.tree;
   const pct = Math.round(progress(item) * 100);
-  const doneCount = item.raw.filter((x) => entry(item.id, x.id).c || entry(item.id, x.id).h >= x.need).length;
+  const mats = matList(item);
+  const doneCount = mats.filter((x) => entry(item.id, x.id).c || entry(item.id, x.id).h >= x.need).length;
   const noRecipe = !root.children;
   const hotmNeeded = Math.max(0, ...(function walk(n) { return [n.recipe?.hotm || 0, ...(n.children || []).flatMap(walk)]; })(root));
   const forgeSec = (function walk(n) { return (n.recipe?.kind === "forge" ? n.recipe.duration * n.recipe.runs : 0) + (n.children || []).reduce((s, c) => s + walk(c), 0); })(root);
@@ -284,7 +311,7 @@ function render() {
       h("div", { class: "chips" },
         hotmNeeded ? h("span", { class: "chip" }, `HotM ${hotmNeeded}`) : null,
         forgeSec ? h("span", { class: "chip" }, `Forge ${fmtDuration(forgeSec)}`) : null,
-        noRecipe ? null : h("span", { class: "chip" }, `${doneCount} / ${item.raw.length} fertig`),
+        noRecipe ? null : h("span", { class: "chip" }, `${doneCount} / ${mats.length} fertig`),
         m.wiki ? h("a", { class: "chip link", href: m.wiki, target: "_blank", rel: "noopener" }, "Wiki ↗") : null)),
     h("div", { class: "ring", style: `--p:${pct}`, role: "progressbar", "aria-valuenow": String(pct), "aria-valuemin": "0", "aria-valuemax": "100" },
       h("span", {}, pct + "%")));
@@ -299,7 +326,7 @@ function render() {
   $("item").replaceChildren(
     hero,
     h("div", { class: "sec-head" }, h("h3", {}, "Materialien")),
-    h("ul", { class: "list" }, item.raw.map((mat) => materialRow(item, mat))),
+    h("ul", { class: "list" }, mats.map((mat) => materialRow(item, mat))),
     h("div", { class: "sec-head" }, h("h3", {}, "Craft-Reihenfolge (von unten nach oben abarbeiten)")),
     h("ul", { class: "tree" }, treeNode(item, root)));
 }
