@@ -2,11 +2,11 @@
 
 Gemeinsame Materialliste für Hypixel SkyBlock auf GitHub Pages. Abhaken wird per Firebase Realtime Database live zwischen allen Besuchern synchronisiert. Zugriff über ein gemeinsames Gruppen-Passwort.
 
-## Neues Item hinzufügen
+## Items hinzufügen
 
-1. ID (NEU-Repo-Name, z. B. `TITANIUM_DRILL_DR_X355`) in `data/targets.json` eintragen.
-2. Optional Beschaffungshinweise für neue Rohstoffe in `data/hints.json` ergänzen.
-3. `node scripts/build-data.mjs` ausführen und `data/items.json` committen.
+Auf der Seite oben im Suchfeld nach dem Item suchen oder einen Wiki-Link einfügen. Das Rezept wird live aus dem NotEnoughUpdates-Repo geladen und bis zu den Rohstoffen aufgelöst. Die Item-Liste wird für die ganze Gruppe in Firebase gespeichert.
+
+Der Suchindex `data/index.json` wird mit `node scripts/build-index.mjs` neu erzeugt (nur nötig, wenn Hypixel neue Items bringt). Beschaffungshinweise für Rohstoffe stehen in `data/hints.json`.
 
 ## Firebase einrichten
 
@@ -28,6 +28,13 @@ Gemeinsame Materialliste für Hypixel SkyBlock auf GitHub Pages. Abhaken wird pe
             ".validate": "newData.hasChildren(['c', 'h']) && newData.child('c').isBoolean() && newData.child('h').isNumber() && newData.child('h').val() >= 0 && newData.child('h').val() <= 10000000"
           }
         }
+      }
+    },
+    "targets": {
+      "<SHA-256 DES PASSWORTS>": {
+        ".read": true,
+        ".write": true,
+        "$id": { ".validate": "newData.isBoolean() && $id.matches(/^[A-Za-z0-9_]{1,80}$/)" }
       }
     }
   }
