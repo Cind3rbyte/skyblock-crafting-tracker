@@ -20,8 +20,7 @@ Gemeinsame Materialliste für Hypixel SkyBlock auf GitHub Pages. Abhaken wird pe
     ".read": false,
     ".write": false,
     "lists": {
-      "$key": {
-        ".validate": "$key.matches(/^[a-f0-9]{64}$/)",
+      "<SHA-256 DES PASSWORTS>": {
         ".read": true,
         ".write": true,
         "$item": {
@@ -35,7 +34,7 @@ Gemeinsame Materialliste für Hypixel SkyBlock auf GitHub Pages. Abhaken wird pe
 }
 ```
 
-Das Passwort wird im Browser per SHA-256 gehasht und dient als Datenbankpfad. Wer es nicht kennt, kann die Liste nicht lesen. Die Firebase-Config ist öffentlich und kein Geheimnis; der Schutz liegt im Passwort-Pfad.
+Das Passwort wird im Browser per SHA-256 gehasht und dient als Datenbankpfad. Die Regeln erlauben nur genau diesen einen Pfad, jedes andere Passwort wird abgelehnt. Die Firebase-Config ist öffentlich und kein Geheimnis; der Schutz liegt im Passwort-Pfad.
 
 ## Lokal testen
 

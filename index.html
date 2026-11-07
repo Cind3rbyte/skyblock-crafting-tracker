@@ -26,7 +26,8 @@
 
     <section id="gate" class="card gate" hidden>
       <h2>Gruppen-Passwort</h2>
-      <p>Wer dasselbe Passwort eingibt, sieht und bearbeitet dieselbe Liste. Ein neues Passwort startet eine neue, leere Liste.</p>
+      <p>Nur mit dem richtigen Passwort kommst du an die gemeinsame Liste.</p>
+      <p id="gate-error" class="err" role="alert" hidden>Falsches Passwort.</p>
       <form id="gate-form">
         <input id="gate-input" type="password" autocomplete="current-password" placeholder="Passwort" required>
         <button type="submit" class="btn primary">Öffnen</button>

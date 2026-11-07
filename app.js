@@ -63,8 +63,8 @@ async function createFirebaseBackend(key) {
   const root = db.ref(database, "lists/" + key);
   return {
     mode: "firebase",
-    listen(cb) {
-      db.onValue(root, (snap) => cb(snap.val() || {}), () => setStatus("error"));
+    listen(cb, denied) {
+      db.onValue(root, (snap) => cb(snap.val() || {}), () => denied());
       db.onValue(db.ref(database, ".info/connected"), (s) => setStatus(s.val() ? "online" : "offline"));
     },
     write(itemId, id, val) {
@@ -244,9 +244,18 @@ function renderTabs() {
 async function openList(key) {
   hash = key;
   backend = firebaseConfig.databaseURL ? await createFirebaseBackend(key) : createLocalBackend(key);
-  $("gate").hidden = true;
-  $("main").hidden = false;
-  backend.listen((s) => { state = s; render(); });
+  backend.listen((s) => {
+    state = s;
+    $("gate").hidden = true;
+    $("main").hidden = false;
+    render();
+  }, () => {
+    store.del("hash");
+    $("main").hidden = true;
+    $("gate").hidden = false;
+    $("gate-error").hidden = false;
+    $("gate-input").select();
+  });
 }
 
 async function main() {
@@ -267,6 +276,7 @@ async function main() {
     ev.preventDefault();
     const pw = $("gate-input").value.trim();
     if (!pw) return;
+    $("gate-error").hidden = true;
     const key = await sha256(pw);
     store.set("hash", key);
     openList(key);
