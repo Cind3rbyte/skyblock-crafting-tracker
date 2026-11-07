@@ -35,7 +35,8 @@ function fmtDuration(sec) {
 let data, hash, backend;
 let state = {};
 let currentItem = null;
-let view = store.get("view") === "blocks" ? "blocks" : "base";
+const VIEWS = { raw: ["Rohstoffe", "raw"], ench: ["Enchanted", "ench"], blocks: ["Blöcke", "mid"] };
+let view = VIEWS[store.get("view2")] ? store.get("view2") : "raw";
 
 function createLocalBackend(key) {
   const k = "state:" + key;
@@ -102,12 +103,32 @@ function nameEl(id, extra = "") {
   return h("span", { class: `name t-${m.tier} ${extra}` }, m.name);
 }
 
-function howBlock(id) {
+function findNode(n, id) {
+  if (n.id === id && n.children) return n;
+  for (const c of n.children || []) {
+    const f = findNode(c, id);
+    if (f) return f;
+  }
+  return null;
+}
+
+function craftText(itemId, id) {
+  const n = findNode(data.items[itemId].tree, id);
+  if (!n) return null;
+  const parts = n.children.map((c) => `${fmt(c.need / n.recipe.runs)}× ${data.meta[c.id].name}`).join(", ");
+  const dur = fmtDuration(n.recipe.duration);
+  const req = data.meta[id].req ? ` Voraussetzung: ${data.meta[id].req}.` : "";
+  return (n.recipe.kind === "forge" ? "Im Forge herstellen" : "Craften") + `: ${parts}.` + (dur ? ` Dauer ${dur}.` : "") + req;
+}
+
+function howBlock(itemId, id) {
   const m = data.meta[id];
   const hint = data.hints[id];
-  if (!hint && !m.wiki) return null;
+  const craft = craftText(itemId, id);
+  if (!hint && !craft && !m.wiki) return null;
   return h("details", { class: "how" },
     h("summary", {}, "Wie komme ich da ran?"),
+    craft ? h("p", {}, craft) : null,
     hint ? h("p", {}, hint.how) : null,
     m.wiki ? h("a", { class: "wikilink", href: m.wiki, target: "_blank", rel: "noopener" }, "Wiki-Seite ↗") : null);
 }
@@ -122,7 +143,7 @@ function materialRow(itemId, mat) {
       setEntry(itemId, mat.id, { h: v, c: v >= mat.need ? true : e.c && v >= mat.need });
     },
   });
-  const step = Math.max(1, Math.min(64, Math.ceil(mat.need / 20)));
+  const step = mat.need >= 10000 ? 1000 : mat.need >= 1000 ? 100 : mat.need >= 100 ? 10 : 1;
   const frac = e.c ? 1 : Math.min(e.h / mat.need, 1);
   return h("li", { class: "row" + (done ? " done" : ""), "data-tier": data.meta[mat.id].tier },
     h("div", { class: "line" },
@@ -137,7 +158,7 @@ function materialRow(itemId, mat) {
         input,
         h("button", { type: "button", "aria-label": "Mehr", onclick: () => { const v = e.h + step; setEntry(itemId, mat.id, { h: v, c: v >= mat.need }); } }, "+"))),
     h("div", { class: "mbar" }, h("i", { style: `width:${Math.round(frac * 100)}%` })),
-    howBlock(mat.id));
+    howBlock(itemId, mat.id));
 }
 
 function treeNode(itemId, n) {
@@ -178,7 +199,7 @@ function progress(item, list) {
 function render() {
   const item = data.items[currentItem];
   const m = data.meta[item.id];
-  const list = view === "base" ? item.raw : item.mid;
+  const list = item[VIEWS[view][1]];
   const pct = Math.round(progress(item, list) * 100);
   const root = item.tree;
 
@@ -201,8 +222,10 @@ function render() {
     h("div", { class: "sec-head" },
       h("h3", {}, "Materialien"),
       h("div", { class: "seg", role: "group", "aria-label": "Ansicht" },
-        h("button", { type: "button", "aria-pressed": String(view === "base"), onclick: () => { view = "base"; store.set("view", view); render(); } }, "Bazaar-Ware"),
-        h("button", { type: "button", "aria-pressed": String(view === "blocks"), onclick: () => { view = "blocks"; store.set("view", view); render(); } }, "Blöcke"))),
+        Object.entries(VIEWS).map(([key, [label]]) => h("button", {
+          type: "button", "aria-pressed": String(view === key),
+          onclick: () => { view = key; store.set("view2", key); render(); },
+        }, label)))),
     h("ul", { class: "list" }, list.map((mat) => materialRow(item.id, mat))),
     h("div", { class: "sec-head" }, h("h3", {}, "Craft-Reihenfolge (von unten nach oben abarbeiten)")),
     h("ul", { class: "tree" }, treeNode(item.id, root)));

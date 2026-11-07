@@ -56,9 +56,8 @@ function readRecipe(data) {
       const { id, n } = parseIn(v);
       sums.set(id, (sums.get(id) || 0) + n);
     }
-    // Nur Block-Stufen weiter auflösen; Enchanted-Grundstufen (Bazaar-Ware) bleiben Blätter.
-    const upper = [...sums.keys()].some((k) => k.startsWith("ENCHANTED_"));
-    if (sums.size && upper) {
+    // Nur Enchanted-Items auflösen; Vanilla-Items (Barren, Blöcke) bleiben Blätter, sonst Zyklen.
+    if (sums.size && data.internalname?.startsWith("ENCHANTED_")) {
       return {
         kind: "craft",
         count: Number(grid.count ?? 1),
@@ -79,6 +78,7 @@ async function describe(id) {
     name: strip(data?.displayname) || api?.name || id,
     tier: api?.tier || "COMMON",
     wiki: data?.info?.find((u) => u.includes("minecraft.wiki")) || null,
+    req: strip(data?.crafttext).replace(/^Requires:\s*/, "") || null,
   };
 }
 
@@ -111,13 +111,17 @@ function flatten(n, stop, out = new Map()) {
 const items = {};
 for (const t of targets) {
   const tree = await node(t.id, t.amount ?? 1);
-  const raw = flatten(tree, () => false);
-  const enchanted = flatten(tree, (n) => n.id.startsWith("ENCHANTED_") && n.id !== t.id);
+  const list = (m) => [...m].map(([id, need]) => ({ id, need }));
+  const isEnch = (n) => n.id.startsWith("ENCHANTED_");
   items[t.id] = {
     id: t.id,
     tree,
-    raw: [...raw].map(([id, need]) => ({ id, need })),
-    mid: [...enchanted].map(([id, need]) => ({ id, need })),
+    // Rohstoffe: alles bis auf Vanilla-Ebene (Erz, Barren, Redstone ...)
+    raw: list(flatten(tree, () => false)),
+    // Enchanted-Grundstufe (z. B. Enchanted Iron Ingot)
+    ench: list(flatten(tree, (n) => isEnch(n) && n.children.every((c) => !isEnch(c)))),
+    // Enchanted-Blöcke (erste Enchanted-Stufe unter dem Rezept)
+    mid: list(flatten(tree, (n) => isEnch(n) && n.id !== t.id)),
   };
 }
 

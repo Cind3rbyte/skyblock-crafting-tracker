@@ -1,32 +1,26 @@
 {
-  "ENCHANTED_IRON": {
-    "how": "Im Bazaar kaufen oder aus 160 Iron Ingot craften. Iron per Eisen-Minion oder in den Gold Mines / Deep Caverns abbauen.",
-    "bazaar": "Enchanted Iron Ingot"
+  "MITHRIL_ORE": {
+    "how": "Abbauen in den Dwarven Mines (Mithril-Erz, graue und hellblaue Blöcke) mit Drill oder Spitzhacke. Je höher Mining Speed und Mining Fortune, desto schneller. Alle 160 Erz ergeben 1 Enchanted Mithril."
   },
-  "ENCHANTED_REDSTONE": {
-    "how": "Im Bazaar kaufen oder aus 160 Redstone craften. Redstone per Minion oder in den Deep Caverns abbauen.",
-    "bazaar": "Enchanted Redstone"
+  "IRON_INGOT": {
+    "how": "Iron-Minion auf der gemeinsamen Co-op-Insel (liefert Barren) oder in Gold Mines, Deep Caverns und Dwarven Mines abbauen."
+  },
+  "REDSTONE": {
+    "how": "Redstone-Minion auf der Co-op-Insel oder in den Deep Caverns und Dwarven Mines abbauen."
+  },
+  "GOLD_INGOT": {
+    "how": "Gold-Minion auf der Co-op-Insel (liefert Barren) oder in den Gold Mines abbauen."
+  },
+  "DIAMOND": {
+    "how": "Diamond-Minion auf der Co-op-Insel oder in der Diamond Reserve und den Deep Caverns abbauen."
+  },
+  "COAL": {
+    "how": "Coal-Minion auf der Co-op-Insel oder in der Coal Mine abbauen."
   },
   "TREASURITE": {
-    "how": "Drops: Treasure Hoarder (0,5 %), einige Bosse (1 %), Truhen in Mithril Deposits, Crystal Nucleus Stash, Angeln im See der Upper Mines. Im Bazaar oder Auktionshaus prüfen, ob gerade günstig."
-  },
-  "ENCHANTED_GOLD": {
-    "how": "Im Bazaar kaufen oder aus 160 Gold Ingot craften. Gold per Minion oder in den Gold Mines abbauen.",
-    "bazaar": "Enchanted Gold Ingot"
-  },
-  "ENCHANTED_DIAMOND": {
-    "how": "Im Bazaar kaufen oder aus 160 Diamond craften. Diamant per Minion oder in den Diamond Reserve / Deep Caverns abbauen.",
-    "bazaar": "Enchanted Diamond"
+    "how": "Nur Drops, kein Handel bei Ironman: Treasure Hoarder (0,5 %), einige Bosse (1 %), Truhen in Mithril Deposits, Crystal-Nucleus-Stash und Angeln im See der Upper Mines."
   },
   "GLACITE_JEWEL": {
-    "how": "Forge-Zutat der Dwarven Mines. Genaue Quelle im Wiki-Link nachsehen, ansonsten Auktionshaus oder Bazaar im Spiel prüfen."
-  },
-  "ENCHANTED_COAL": {
-    "how": "Im Bazaar kaufen oder aus 160 Coal craften. Coal per Minion oder in den Coal Mines abbauen.",
-    "bazaar": "Enchanted Coal"
-  },
-  "ENCHANTED_MITHRIL": {
-    "how": "Im Bazaar kaufen oder aus 160 Mithril (Erz) craften. Erz in den Dwarven Mines mit Drill oder Spitzhacke abbauen oder per Minion. Für den Drill werden insgesamt 480 Stück gebraucht, das sind 76.800 Erz.",
-    "bazaar": "Enchanted Mithril"
+    "how": "Laut einer Drittquelle droppt es mit 0,5 % von Ice Walkern in den Dwarven Mines. Nicht im Wiki bestätigt, bitte im Spiel gegenprüfen."
   }
 }
