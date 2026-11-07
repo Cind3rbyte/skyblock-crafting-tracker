@@ -109,7 +109,7 @@ function howBlock(id) {
   return h("details", { class: "how" },
     h("summary", {}, "Wie komme ich da ran?"),
     hint ? h("p", {}, hint.how) : null,
-    m.wiki ? h("p", {}, h("a", { href: m.wiki, target: "_blank", rel: "noopener" }, "Wiki-Seite")) : null);
+    m.wiki ? h("a", { class: "wikilink", href: m.wiki, target: "_blank", rel: "noopener" }, "Wiki-Seite ↗") : null);
 }
 
 function materialRow(itemId, mat) {
@@ -123,7 +123,8 @@ function materialRow(itemId, mat) {
     },
   });
   const step = Math.max(1, Math.min(64, Math.ceil(mat.need / 20)));
-  return h("li", { class: "row" + (done ? " done" : "") },
+  const frac = e.c ? 1 : Math.min(e.h / mat.need, 1);
+  return h("li", { class: "row" + (done ? " done" : ""), "data-tier": data.meta[mat.id].tier },
     h("div", { class: "line" },
       h("input", {
         class: "chk", type: "checkbox", checked: done, "aria-label": `${data.meta[mat.id].name} abgehakt`,
@@ -135,6 +136,7 @@ function materialRow(itemId, mat) {
         h("button", { type: "button", "aria-label": "Weniger", onclick: () => setEntry(itemId, mat.id, { h: Math.max(0, e.h - step), c: false }) }, "−"),
         input,
         h("button", { type: "button", "aria-label": "Mehr", onclick: () => { const v = e.h + step; setEntry(itemId, mat.id, { h: v, c: v >= mat.need }); } }, "+"))),
+    h("div", { class: "mbar" }, h("i", { style: `width:${Math.round(frac * 100)}%` })),
     howBlock(mat.id));
 }
 
@@ -181,14 +183,21 @@ function render() {
   const root = item.tree;
 
   const hotmNeeded = Math.max(0, ...(function walk(n) { return [n.recipe?.hotm || 0, ...(n.children || []).flatMap(walk)]; })(root));
+  const forgeSec = (function walk(n) { return (n.recipe?.kind === "forge" ? n.recipe.duration * n.recipe.runs : 0) + (n.children || []).reduce((s, c) => s + walk(c), 0); })(root);
+  const doneCount = list.filter((x) => entry(item.id, x.id).c || entry(item.id, x.id).h >= x.need).length;
 
   $("item").replaceChildren(
-    h("div", { class: "hero card" },
-      h("h2", { class: `t-${m.tier}` }, m.name),
-      h("div", { class: "meta" }, `Höchste Anforderung im Baum: Heart of the Mountain ${hotmNeeded}` + (m.wiki ? " · " : ""),
-        m.wiki ? h("a", { href: m.wiki, target: "_blank", rel: "noopener", style: "color:var(--rare)" }, "Wiki") : null),
-      h("div", { class: "bar", role: "progressbar", "aria-valuenow": String(pct), "aria-valuemin": "0", "aria-valuemax": "100" }, h("i", { style: `width:${pct}%` })),
-      h("div", { class: "bar-label" }, h("span", {}, "Fortschritt"), h("span", {}, pct + " %"))),
+    h("div", { class: "hero" },
+      h("div", { class: "hero-text" },
+        h("span", { class: "eyebrow" }, "Ziel-Item"),
+        h("h2", { class: `t-${m.tier}` }, m.name),
+        h("div", { class: "chips" },
+          h("span", { class: "chip" }, `HotM ${hotmNeeded}`),
+          h("span", { class: "chip" }, `Forge ${fmtDuration(forgeSec)}`),
+          h("span", { class: "chip" }, `${doneCount} / ${list.length} fertig`),
+          m.wiki ? h("a", { class: "chip link", href: m.wiki, target: "_blank", rel: "noopener" }, "Wiki ↗") : null)),
+      h("div", { class: "ring", style: `--p:${pct}`, role: "progressbar", "aria-valuenow": String(pct), "aria-valuemin": "0", "aria-valuemax": "100" },
+        h("span", {}, pct + "%"))),
     h("div", { class: "sec-head" },
       h("h3", {}, "Materialien"),
       h("div", { class: "seg", role: "group", "aria-label": "Ansicht" },
