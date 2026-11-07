@@ -1,0 +1,32 @@
+{
+  "ENCHANTED_IRON": {
+    "how": "Im Bazaar kaufen oder aus 160 Iron Ingot craften. Iron per Eisen-Minion oder in den Gold Mines / Deep Caverns abbauen.",
+    "bazaar": "Enchanted Iron Ingot"
+  },
+  "ENCHANTED_REDSTONE": {
+    "how": "Im Bazaar kaufen oder aus 160 Redstone craften. Redstone per Minion oder in den Deep Caverns abbauen.",
+    "bazaar": "Enchanted Redstone"
+  },
+  "TREASURITE": {
+    "how": "Drops: Treasure Hoarder (0,5 %), einige Bosse (1 %), Truhen in Mithril Deposits, Crystal Nucleus Stash, Angeln im See der Upper Mines. Im Bazaar oder Auktionshaus prüfen, ob gerade günstig."
+  },
+  "ENCHANTED_GOLD": {
+    "how": "Im Bazaar kaufen oder aus 160 Gold Ingot craften. Gold per Minion oder in den Gold Mines abbauen.",
+    "bazaar": "Enchanted Gold Ingot"
+  },
+  "ENCHANTED_DIAMOND": {
+    "how": "Im Bazaar kaufen oder aus 160 Diamond craften. Diamant per Minion oder in den Diamond Reserve / Deep Caverns abbauen.",
+    "bazaar": "Enchanted Diamond"
+  },
+  "GLACITE_JEWEL": {
+    "how": "Forge-Zutat der Dwarven Mines. Genaue Quelle im Wiki-Link nachsehen, ansonsten Auktionshaus oder Bazaar im Spiel prüfen."
+  },
+  "ENCHANTED_COAL": {
+    "how": "Im Bazaar kaufen oder aus 160 Coal craften. Coal per Minion oder in den Coal Mines abbauen.",
+    "bazaar": "Enchanted Coal"
+  },
+  "ENCHANTED_MITHRIL": {
+    "how": "Im Bazaar kaufen oder aus 160 Mithril (Erz) craften. Erz in den Dwarven Mines mit Drill oder Spitzhacke abbauen oder per Minion. Für den Drill werden insgesamt 480 Stück gebraucht, das sind 76.800 Erz.",
+    "bazaar": "Enchanted Mithril"
+  }
+}

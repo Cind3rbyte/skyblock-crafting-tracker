@@ -1,0 +1,369 @@
+{
+ "generated": "2026-11-07T12:45:27.124Z",
+ "meta": {
+  "MITHRIL_DRILL_1": {
+   "name": "Mithril Drill SX-R226",
+   "tier": "RARE",
+   "wiki": "https://hypixelskyblock.minecraft.wiki/w/Mithril_Drill_SX-R226"
+  },
+  "REFINED_MITHRIL": {
+   "name": "Refined Mithril",
+   "tier": "EPIC",
+   "wiki": "https://hypixelskyblock.minecraft.wiki/w/Refined_Mithril"
+  },
+  "ENCHANTED_MITHRIL": {
+   "name": "Enchanted Mithril",
+   "tier": "RARE",
+   "wiki": "https://hypixelskyblock.minecraft.wiki/w/Enchanted_Mithril"
+  },
+  "DRILL_ENGINE": {
+   "name": "Drill Motor",
+   "tier": "RARE",
+   "wiki": "https://hypixelskyblock.minecraft.wiki/w/Drill_Motor"
+  },
+  "ENCHANTED_IRON_BLOCK": {
+   "name": "Enchanted Iron Block",
+   "tier": "RARE",
+   "wiki": "https://hypixelskyblock.minecraft.wiki/w/Enchanted_Iron_Block"
+  },
+  "ENCHANTED_IRON": {
+   "name": "Enchanted Iron Ingot",
+   "tier": "UNCOMMON",
+   "wiki": "https://hypixelskyblock.minecraft.wiki/w/Enchanted_Iron_Ingot"
+  },
+  "ENCHANTED_REDSTONE_BLOCK": {
+   "name": "Enchanted Redstone Block",
+   "tier": "RARE",
+   "wiki": "https://hypixelskyblock.minecraft.wiki/w/Enchanted_Redstone_Block"
+  },
+  "ENCHANTED_REDSTONE": {
+   "name": "Enchanted Redstone Dust",
+   "tier": "UNCOMMON",
+   "wiki": "https://hypixelskyblock.minecraft.wiki/w/Enchanted_Redstone_Dust"
+  },
+  "TREASURITE": {
+   "name": "Treasurite",
+   "tier": "EPIC",
+   "wiki": "https://hypixelskyblock.minecraft.wiki/w/Treasurite"
+  },
+  "GOLDEN_PLATE": {
+   "name": "Golden Plate",
+   "tier": "RARE",
+   "wiki": "https://hypixelskyblock.minecraft.wiki/w/Golden_Plate"
+  },
+  "ENCHANTED_GOLD_BLOCK": {
+   "name": "Enchanted Gold Block",
+   "tier": "RARE",
+   "wiki": "https://hypixelskyblock.minecraft.wiki/w/Enchanted_Gold_Block"
+  },
+  "ENCHANTED_GOLD": {
+   "name": "Enchanted Gold Ingot",
+   "tier": "UNCOMMON",
+   "wiki": "https://hypixelskyblock.minecraft.wiki/w/Enchanted_Gold_Ingot"
+  },
+  "REFINED_DIAMOND": {
+   "name": "Refined Diamond",
+   "tier": "EPIC",
+   "wiki": "https://hypixelskyblock.minecraft.wiki/w/Refined_Diamond"
+  },
+  "ENCHANTED_DIAMOND_BLOCK": {
+   "name": "Enchanted Diamond Block",
+   "tier": "RARE",
+   "wiki": "https://hypixelskyblock.minecraft.wiki/w/Enchanted_Diamond_Block"
+  },
+  "ENCHANTED_DIAMOND": {
+   "name": "Enchanted Diamond",
+   "tier": "UNCOMMON",
+   "wiki": "https://hypixelskyblock.minecraft.wiki/w/Enchanted_Diamond"
+  },
+  "GLACITE_JEWEL": {
+   "name": "Glacite Jewel",
+   "tier": "RARE",
+   "wiki": "https://hypixelskyblock.minecraft.wiki/w/Glacite_Jewel"
+  },
+  "FUEL_TANK": {
+   "name": "Fuel Canister",
+   "tier": "RARE",
+   "wiki": "https://hypixelskyblock.minecraft.wiki/w/Fuel_Canister"
+  },
+  "ENCHANTED_COAL_BLOCK": {
+   "name": "Enchanted Coal Block",
+   "tier": "RARE",
+   "wiki": "https://hypixelskyblock.minecraft.wiki/w/Enchanted_Coal_Block"
+  },
+  "ENCHANTED_COAL": {
+   "name": "Enchanted Coal",
+   "tier": "UNCOMMON",
+   "wiki": "https://hypixelskyblock.minecraft.wiki/w/Enchanted_Coal"
+  }
+ },
+ "hints": {
+  "ENCHANTED_IRON": {
+   "how": "Im Bazaar kaufen oder aus 160 Iron Ingot craften. Iron per Eisen-Minion oder in den Gold Mines / Deep Caverns abbauen.",
+   "bazaar": "Enchanted Iron Ingot"
+  },
+  "ENCHANTED_REDSTONE": {
+   "how": "Im Bazaar kaufen oder aus 160 Redstone craften. Redstone per Minion oder in den Deep Caverns abbauen.",
+   "bazaar": "Enchanted Redstone"
+  },
+  "TREASURITE": {
+   "how": "Drops: Treasure Hoarder (0,5 %), einige Bosse (1 %), Truhen in Mithril Deposits, Crystal Nucleus Stash, Angeln im See der Upper Mines. Im Bazaar oder Auktionshaus prüfen, ob gerade günstig."
+  },
+  "ENCHANTED_GOLD": {
+   "how": "Im Bazaar kaufen oder aus 160 Gold Ingot craften. Gold per Minion oder in den Gold Mines abbauen.",
+   "bazaar": "Enchanted Gold Ingot"
+  },
+  "ENCHANTED_DIAMOND": {
+   "how": "Im Bazaar kaufen oder aus 160 Diamond craften. Diamant per Minion oder in den Diamond Reserve / Deep Caverns abbauen.",
+   "bazaar": "Enchanted Diamond"
+  },
+  "GLACITE_JEWEL": {
+   "how": "Forge-Zutat der Dwarven Mines. Genaue Quelle im Wiki-Link nachsehen, ansonsten Auktionshaus oder Bazaar im Spiel prüfen."
+  },
+  "ENCHANTED_COAL": {
+   "how": "Im Bazaar kaufen oder aus 160 Coal craften. Coal per Minion oder in den Coal Mines abbauen.",
+   "bazaar": "Enchanted Coal"
+  },
+  "ENCHANTED_MITHRIL": {
+   "how": "Im Bazaar kaufen oder aus 160 Mithril (Erz) craften. Erz in den Dwarven Mines mit Drill oder Spitzhacke abbauen oder per Minion. Für den Drill werden insgesamt 480 Stück gebraucht, das sind 76.800 Erz.",
+   "bazaar": "Enchanted Mithril"
+  }
+ },
+ "items": {
+  "MITHRIL_DRILL_1": {
+   "id": "MITHRIL_DRILL_1",
+   "tree": {
+    "id": "MITHRIL_DRILL_1",
+    "need": 1,
+    "recipe": {
+     "kind": "forge",
+     "runs": 1,
+     "duration": 14400,
+     "hotm": 2
+    },
+    "children": [
+     {
+      "id": "REFINED_MITHRIL",
+      "need": 3,
+      "recipe": {
+       "kind": "forge",
+       "runs": 3,
+       "duration": 21600,
+       "hotm": 2
+      },
+      "children": [
+       {
+        "id": "ENCHANTED_MITHRIL",
+        "need": 480
+       }
+      ]
+     },
+     {
+      "id": "DRILL_ENGINE",
+      "need": 1,
+      "recipe": {
+       "kind": "forge",
+       "runs": 1,
+       "duration": 108000,
+       "hotm": 3
+      },
+      "children": [
+       {
+        "id": "ENCHANTED_IRON_BLOCK",
+        "need": 1,
+        "recipe": {
+         "kind": "craft",
+         "runs": 1,
+         "duration": null,
+         "hotm": null
+        },
+        "children": [
+         {
+          "id": "ENCHANTED_IRON",
+          "need": 160
+         }
+        ]
+       },
+       {
+        "id": "ENCHANTED_REDSTONE_BLOCK",
+        "need": 3,
+        "recipe": {
+         "kind": "craft",
+         "runs": 3,
+         "duration": null,
+         "hotm": null
+        },
+        "children": [
+         {
+          "id": "ENCHANTED_REDSTONE",
+          "need": 480
+         }
+        ]
+       },
+       {
+        "id": "TREASURITE",
+        "need": 10
+       },
+       {
+        "id": "GOLDEN_PLATE",
+        "need": 1,
+        "recipe": {
+         "kind": "forge",
+         "runs": 1,
+         "duration": 21600,
+         "hotm": 2
+        },
+        "children": [
+         {
+          "id": "ENCHANTED_GOLD_BLOCK",
+          "need": 2,
+          "recipe": {
+           "kind": "craft",
+           "runs": 2,
+           "duration": null,
+           "hotm": null
+          },
+          "children": [
+           {
+            "id": "ENCHANTED_GOLD",
+            "need": 320
+           }
+          ]
+         },
+         {
+          "id": "REFINED_DIAMOND",
+          "need": 1,
+          "recipe": {
+           "kind": "forge",
+           "runs": 1,
+           "duration": 28800,
+           "hotm": 2
+          },
+          "children": [
+           {
+            "id": "ENCHANTED_DIAMOND_BLOCK",
+            "need": 2,
+            "recipe": {
+             "kind": "craft",
+             "runs": 2,
+             "duration": null,
+             "hotm": null
+            },
+            "children": [
+             {
+              "id": "ENCHANTED_DIAMOND",
+              "need": 320
+             }
+            ]
+           }
+          ]
+         },
+         {
+          "id": "GLACITE_JEWEL",
+          "need": 5
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "id": "FUEL_TANK",
+      "need": 1,
+      "recipe": {
+       "kind": "forge",
+       "runs": 1,
+       "duration": 36000,
+       "hotm": 2
+      },
+      "children": [
+       {
+        "id": "ENCHANTED_COAL_BLOCK",
+        "need": 2,
+        "recipe": {
+         "kind": "craft",
+         "runs": 2,
+         "duration": null,
+         "hotm": null
+        },
+        "children": [
+         {
+          "id": "ENCHANTED_COAL",
+          "need": 320
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "raw": [
+    {
+     "id": "ENCHANTED_MITHRIL",
+     "need": 480
+    },
+    {
+     "id": "ENCHANTED_IRON",
+     "need": 160
+    },
+    {
+     "id": "ENCHANTED_REDSTONE",
+     "need": 480
+    },
+    {
+     "id": "TREASURITE",
+     "need": 10
+    },
+    {
+     "id": "ENCHANTED_GOLD",
+     "need": 320
+    },
+    {
+     "id": "ENCHANTED_DIAMOND",
+     "need": 320
+    },
+    {
+     "id": "GLACITE_JEWEL",
+     "need": 5
+    },
+    {
+     "id": "ENCHANTED_COAL",
+     "need": 320
+    }
+   ],
+   "mid": [
+    {
+     "id": "ENCHANTED_MITHRIL",
+     "need": 480
+    },
+    {
+     "id": "ENCHANTED_IRON_BLOCK",
+     "need": 1
+    },
+    {
+     "id": "ENCHANTED_REDSTONE_BLOCK",
+     "need": 3
+    },
+    {
+     "id": "TREASURITE",
+     "need": 10
+    },
+    {
+     "id": "ENCHANTED_GOLD_BLOCK",
+     "need": 2
+    },
+    {
+     "id": "ENCHANTED_DIAMOND_BLOCK",
+     "need": 2
+    },
+    {
+     "id": "GLACITE_JEWEL",
+     "need": 5
+    },
+    {
+     "id": "ENCHANTED_COAL_BLOCK",
+     "need": 2
+    }
+   ]
+  }
+ }
+}
